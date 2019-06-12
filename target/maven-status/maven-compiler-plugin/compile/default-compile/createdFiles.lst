@@ -1,9 +1,15 @@
 br\com\granjainteligente\model\Baia.class
 br\com\granjainteligente\controller\SensorController.class
-br\com\granjainteligente\controller\Application.class
-br\com\granjainteligente\controller\BaiaController.class
+br\com\granjainteligente\implementation\Climatizador.class
+br\com\granjainteligente\implementation\Bebedouro.class
 br\com\granjainteligente\model\Alimento.class
 br\com\granjainteligente\model\Sensor.class
+br\com\granjainteligente\Interface\IAtuador.class
+br\com\granjainteligente\model\Agua.class
+br\com\granjainteligente\controller\Application.class
+br\com\granjainteligente\controller\BaiaController.class
+br\com\granjainteligente\implementation\Alimentador.class
+br\com\granjainteligente\implementation\BaiaImplementation.class
 br\com\granjainteligente\implementation\PopulaDados.class
 br\com\granjainteligente\controller\Application$1.class
 br\com\granjainteligente\model\Temperatura.class
