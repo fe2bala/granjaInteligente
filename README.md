@@ -1,2 +1,0 @@
-# granjaInteligente
-projeto de soo
