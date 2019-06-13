@@ -14,5 +14,4 @@ br\com\granjainteligente\granja\GranjaApplication$1.class
 br\com\granjainteligente\granja\GranjaApplication.class
 br\com\granjainteligente\granja\model\Baia.class
 br\com\granjainteligente\granja\Repository\TemperaturaRepository.class
-.netbeans_automatic_build
 br\com\granjainteligente\granja\Repository\AlimentoRepository.class
