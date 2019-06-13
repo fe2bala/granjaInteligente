@@ -18,6 +18,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class TemperaturaService {
     @Autowired
     TemperaturaRepository temperaturaRepository;
+    @Autowired
+    SensorService sensorService;
+    
     public Temperatura getTemperatura(long id){
         //verificar aqui?
         return temperaturaRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Temperatura", "id", id));
@@ -25,8 +28,7 @@ public class TemperaturaService {
     public Temperatura updateTemperatura(long temperaturaId,Temperatura model){
         
         Temperatura sensor = temperaturaRepository.findById(temperaturaId).orElseThrow(() -> new ResourceNotFoundException("Temperatura", "id", temperaturaId));
-        sensor.setEstado(model.isEstado());
-        sensor.setAuto(model.isAuto());
+        sensorService.update(sensor, model);
         sensor.setCurrentTemperature(model.getCurrentTemperature());
         sensor.setTemperatureSet(model.getTemperatureSet());
         Temperatura updateTemperatura = temperaturaRepository.save(sensor);
@@ -38,13 +40,14 @@ public class TemperaturaService {
         return createdTemperatura;
     }
         
-    private void verifySensor(Temperatura temperatura) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+
     public List<Temperatura> getAllTemperaturas(){
         List<Temperatura> temperaturas =  temperaturaRepository.findAll();
         //verificar aqui? foreach temperatura verifySensors
         return temperaturas;
+    }
+        public void verifySensor(Temperatura temperatura) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

@@ -5,14 +5,14 @@
  */
 package br.com.granjainteligente.granja.controller;
 
-import br.com.granjainteligente.granja.Exception.ResourceNotFoundException;
-import br.com.granjainteligente.granja.Repository.AguaRepository;
+import br.com.granjainteligente.granja.Service.AguaService;
 import br.com.granjainteligente.granja.model.Agua;
 import java.util.List;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,28 +27,24 @@ import org.springframework.web.bind.annotation.RestController;
 public class AguaController {
     
     @Autowired
-    AguaRepository aguaService;
+    AguaService aguaService;
     
     @GetMapping("/agua")
     public List<Agua> getAllAgua(){
-        return aguaService.findAll();
+        return aguaService.getAllAguas();
     }
     @PutMapping("/agua/{id}")
     public Agua putAgua(@PathVariable(value="id")long aguaId,@Valid @RequestBody Agua model){
-        
-        Agua sensor = aguaService.findById(aguaId).orElseThrow(() -> new ResourceNotFoundException("Agua", "id", aguaId));
-        sensor.setEstado(model.isEstado());
-        sensor.setAuto(model.isAuto());
-        sensor.setNivel(model.getNivel());
-        sensor.setNivelSet(model.getNivelSet());
-        Agua updateAgua = aguaService.save(sensor);
                 
-        return updateAgua;
+        return aguaService.updateAgua(aguaId, model);
         
     }
     @GetMapping("/agua/{id}")
-    public Agua getBaiaById(@PathVariable(value = "id") Long aguaId) {
-        //fazer verificacao aqui
-        return aguaService.findById(aguaId).orElseThrow(() -> new ResourceNotFoundException("Agua", "id", aguaId));
+    public Agua getAguaById(@PathVariable(value = "id") Long aguaId) {
+        return aguaService.getAgua(aguaId);
+    }
+    @PostMapping("/agua")
+    public Agua createTempSensor(Agua model){
+        return aguaService.createAgua(model);
     }
 }

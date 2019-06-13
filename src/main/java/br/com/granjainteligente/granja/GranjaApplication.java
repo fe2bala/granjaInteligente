@@ -1,5 +1,10 @@
 package br.com.granjainteligente.granja;
 
+import br.com.granjainteligente.granja.Service.AguaService;
+import br.com.granjainteligente.granja.Service.AlimentoService;
+import br.com.granjainteligente.granja.Service.BaiaService;
+import br.com.granjainteligente.granja.Service.SensorService;
+import br.com.granjainteligente.granja.Service.TemperaturaService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -23,5 +28,25 @@ public class GranjaApplication {
                  registry.addMapping("/**").allowedOrigins("*").allowedMethods("GET","POST","PUT");
               }
            };
+        }
+        @Bean
+        public BaiaService baiaService() {
+            return new BaiaService();
+        }
+        @Bean
+        public AguaService aguaService() {
+            return new AguaService();
+        }
+        @Bean
+        public AlimentoService alimentoService() {
+            return new AlimentoService();
+        }
+        @Bean
+        public TemperaturaService temperaturaService() {
+            return new TemperaturaService();
+        }  
+        @Bean
+        public SensorService sensorService() {
+            return new SensorService();
         }
 }

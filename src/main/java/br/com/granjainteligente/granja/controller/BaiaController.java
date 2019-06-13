@@ -5,7 +5,6 @@
  */
 package br.com.granjainteligente.granja.controller;
 
-import br.com.granjainteligente.granja.Exception.ResourceNotFoundException;
 import br.com.granjainteligente.granja.Service.BaiaService;
 import br.com.granjainteligente.granja.model.Baia;
 import java.util.List;
