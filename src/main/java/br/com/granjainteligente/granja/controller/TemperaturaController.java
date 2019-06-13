@@ -6,8 +6,8 @@
 package br.com.granjainteligente.granja.controller;
 
 import br.com.granjainteligente.granja.Exception.ResourceNotFoundException;
-import br.com.granjainteligente.granja.Service.BaiaService;
-import br.com.granjainteligente.granja.model.Baia;
+import br.com.granjainteligente.granja.Service.TemperaturaService;
+import br.com.granjainteligente.granja.model.Temperatura;
 import java.util.List;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,28 +25,26 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/api")
-public class BaiaController {
+public class TemperaturaController {
+    
     @Autowired
-    BaiaService baiaService;
+    TemperaturaService temperaturaService;
     
-    @GetMapping("/baias")
-    public List<Baia> getAllBaias(){
-        return baiaService.getAllBaias();
+    @GetMapping("/temperatura")
+    public List<Temperatura> getAllTemperatura(){
+        return temperaturaService.getAllTemperaturas();
     }
-    
-    @PostMapping("/baias")
-    public Baia createBaia(@Valid @RequestBody Baia baia) {   
-        return baiaService.createBaia(baia);
-    }
-    @PutMapping("/baias/{id}")
-    public Baia updateBaia(@PathVariable(value="id")long baiaId, @Valid @RequestBody Baia model){
+    @PutMapping("/temperatura/{id}")
+    public Temperatura putTemperatura(@PathVariable(value="id")long temperaturaId,@Valid @RequestBody Temperatura model){
         
-       return baiaService.updateBaia(baiaId, model);
+        return temperaturaService.updateTemperatura(temperaturaId, model);
     }
-    @GetMapping("/baia/{id}")
-    public Baia getBaiaById(@PathVariable(value = "id") Long baiaId) {
-        //verificao aqui
-       return baiaService.getBaia(baiaId);
+    @GetMapping("/temperatura/{id}")
+    public Temperatura getBaiaById(@PathVariable(value = "id") Long temperaturaId) {
+        return temperaturaService.getTemperatura(temperaturaId);
     }
-
+    @PostMapping("/temperatura")
+    public Temperatura createTempSensor(Temperatura model){
+        return temperaturaService.createTemperatura(model);
+    }
 }

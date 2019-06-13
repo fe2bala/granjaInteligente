@@ -6,8 +6,8 @@
 package br.com.granjainteligente.granja.controller;
 
 import br.com.granjainteligente.granja.Exception.ResourceNotFoundException;
-import br.com.granjainteligente.granja.Repository.AlimentoRepository;
-import br.com.granjainteligente.granja.model.Alimento;
+import br.com.granjainteligente.granja.Repository.AguaRepository;
+import br.com.granjainteligente.granja.model.Agua;
 import java.util.List;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,31 +24,31 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/api")
-public class AlimentoController {
+public class AguaController {
     
     @Autowired
-    AlimentoRepository alimentoService;
+    AguaRepository aguaService;
     
-    @GetMapping("/alimento")
-    public List<Alimento> getAllAlimento(){
-        return alimentoService.findAll();
+    @GetMapping("/agua")
+    public List<Agua> getAllAgua(){
+        return aguaService.findAll();
     }
-    @PutMapping("/alimento/{id}")
-    public Alimento putAlimento(@PathVariable(value="id")long alimentoId,@Valid @RequestBody Alimento model){
+    @PutMapping("/agua/{id}")
+    public Agua putAgua(@PathVariable(value="id")long aguaId,@Valid @RequestBody Agua model){
         
-        Alimento sensor = alimentoService.findById(alimentoId).orElseThrow(() -> new ResourceNotFoundException("Alimento", "id", alimentoId));
+        Agua sensor = aguaService.findById(aguaId).orElseThrow(() -> new ResourceNotFoundException("Agua", "id", aguaId));
         sensor.setEstado(model.isEstado());
         sensor.setAuto(model.isAuto());
         sensor.setNivel(model.getNivel());
         sensor.setNivelSet(model.getNivelSet());
-        Alimento updateAlimento = alimentoService.save(sensor);
+        Agua updateAgua = aguaService.save(sensor);
                 
-        return updateAlimento;
+        return updateAgua;
         
     }
-    @GetMapping("/alimento/{id}")
-    public Alimento getBaiaById(@PathVariable(value = "id") Long alimentoId) {
-        //fazer verifacao aqui
-        return alimentoService.findById(alimentoId).orElseThrow(() -> new ResourceNotFoundException("Alimento", "id", alimentoId));
+    @GetMapping("/agua/{id}")
+    public Agua getBaiaById(@PathVariable(value = "id") Long aguaId) {
+        //fazer verificacao aqui
+        return aguaService.findById(aguaId).orElseThrow(() -> new ResourceNotFoundException("Agua", "id", aguaId));
     }
 }

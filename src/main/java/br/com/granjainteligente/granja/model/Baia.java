@@ -5,9 +5,11 @@
  */
 package br.com.granjainteligente.granja.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -31,6 +33,7 @@ public class Baia {
     private int Age;
     private String Name;
     @OneToOne(cascade = CascadeType.ALL)
+    
     @JoinColumn(name = "alimento_id", referencedColumnName = "id")
     private Alimento Alimento;
     @OneToOne(cascade = CascadeType.ALL)
@@ -39,7 +42,7 @@ public class Baia {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "luminosidade_id", referencedColumnName = "id")
     private Luminosidade Luminosidade;
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL )
     @JoinColumn(name = "agua_id", referencedColumnName = "id")
     private Agua Agua;
 
