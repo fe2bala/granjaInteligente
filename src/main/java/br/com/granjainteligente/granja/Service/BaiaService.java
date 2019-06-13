@@ -18,6 +18,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class BaiaService {
     @Autowired
     BaiaRepository baiaRepository;
+    @Autowired 
+    TemperaturaService temperaturaService;
+    @Autowired
+    AlimentoService alimentoService;
+    @Autowired
+    AguaService aguaService;
+    
     public Baia getBaia(long id){
         //verificar aqui?
         return baiaRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Baia", "id", id));
@@ -38,7 +45,9 @@ public class BaiaService {
     }
         
     private void verifySensors(Baia baia) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        temperaturaService.verifySensor(baia.getTemperatura());
+        alimentoService.verifySensor(baia.getAlimento());
+        aguaService.verifySensor(baia.getAgua());
     }
     public List<Baia> getAllBaias(){
         List<Baia> baias =  baiaRepository.findAll();
