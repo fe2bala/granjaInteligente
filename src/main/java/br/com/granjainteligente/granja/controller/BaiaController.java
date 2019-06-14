@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Optional;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -30,6 +31,7 @@ public class BaiaController {
     @Autowired
     BaiaRepository baiaService;
     
+    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("/baias")
     public List<Baia> getAllBaias(){
         return baiaService.findAll();
@@ -37,6 +39,7 @@ public class BaiaController {
     
     @PostMapping("/baias")
     public Baia createBaia(@Valid @RequestBody Baia baia) {
+        System.out.println(baia.getName());
         return baiaService.save(baia);
     }
     @PutMapping("/baias/{id}")

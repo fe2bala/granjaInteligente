@@ -8,8 +8,11 @@ package br.com.granjainteligente.granja.controller;
 import br.com.granjainteligente.granja.Repository.AlimentoRepository;
 import br.com.granjainteligente.granja.model.Alimento;
 import java.util.List;
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -28,4 +31,9 @@ public class AlimentoController {
     public List<Alimento> getAllAlimento(){
         return alimentoService.findAll();
     }
+    
+    @PostMapping("/Alimento")
+    public Alimento createAlimento(@Valid @RequestBody Alimento alimento){
+        return alimentoService.save(alimento);
+    } 
 }
