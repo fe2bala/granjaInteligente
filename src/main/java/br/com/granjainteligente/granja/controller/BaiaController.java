@@ -5,11 +5,9 @@
  */
 package br.com.granjainteligente.granja.controller;
 
-import br.com.granjainteligente.granja.Exception.ResourceNotFoundException;
-import br.com.granjainteligente.granja.Repository.BaiaRepository;
+import br.com.granjainteligente.granja.Service.BaiaService;
 import br.com.granjainteligente.granja.model.Baia;
 import java.util.List;
-import java.util.Optional;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -29,30 +27,27 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api")
 public class BaiaController {
     @Autowired
-    BaiaRepository baiaService;
+    BaiaService baiaService;
     
     @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("/baias")
     public List<Baia> getAllBaias(){
-        return baiaService.findAll();
+        return baiaService.getAllBaias();
     }
     
     @PostMapping("/baias")
-    public Baia createBaia(@Valid @RequestBody Baia baia) {
-        System.out.println(baia.getName());
-        return baiaService.save(baia);
+    public Baia createBaia(@Valid @RequestBody Baia baia) {   
+        return baiaService.createBaia(baia);
     }
     @PutMapping("/baias/{id}")
     public Baia updateBaia(@PathVariable(value="id")long baiaId, @Valid @RequestBody Baia model){
         
-        Baia baia= baiaService.findById(baiaId).orElseThrow(() -> new ResourceNotFoundException("Baia", "id", baiaId));
-        baia.setAge(model.getAge());
-        baia.setName(model.getName());
-        baia.setStatus(model.isStatus());
-        Baia updateBaia = baiaService.save(baia);
-        
-        return updateBaia;
-        
-        
+       return baiaService.updateBaia(baiaId, model);
     }
+    @GetMapping("/baia/{id}")
+    public Baia getBaiaById(@PathVariable(value = "id") Long baiaId) {
+        //verificao aqui
+       return baiaService.getBaia(baiaId);
+    }
+
 }

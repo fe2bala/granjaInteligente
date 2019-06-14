@@ -5,12 +5,13 @@
  */
 package br.com.granjainteligente.granja.controller;
 
-import br.com.granjainteligente.granja.Exception.ResourceNotFoundException;
-import br.com.granjainteligente.granja.Repository.LuminosidadeRepository;
+import br.com.granjainteligente.granja.Service.LuminosidadeService;
 import br.com.granjainteligente.granja.model.Luminosidade;
 import java.util.List;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,35 +25,29 @@ import org.springframework.web.bind.annotation.RestController;
  * @author felip
  */
 @RestController
+@CrossOrigin(allowedHeaders = "*",origins = "*")
 @RequestMapping("/api")
 public class LuminosidadeController {
-
+    
     @Autowired
-    LuminosidadeRepository luminosidadeService;
-
-    @GetMapping("/Luminosidade")
-    public List<Luminosidade> getAllLuminosidade() {
-        return luminosidadeService.findAll();
+    LuminosidadeService luminosidadeService;
+    
+    @GetMapping("/luminosidade")
+    public List<Luminosidade> getAllLuminosidade(){
+        return luminosidadeService.getAllLuminosidades();
     }
-
-    @PostMapping("/Luminosidade")
-    public Luminosidade createLuminosidade(@Valid @RequestBody Luminosidade luminosidade) {
-        return luminosidadeService.save(luminosidade);
-    }
-
-    @PutMapping("/Luminosidade/{id}")
-    public Luminosidade updateLuminosidade(@PathVariable(value = "id") long luminosidadeId, @Valid @RequestBody Luminosidade model) {
-        Luminosidade sensor = luminosidadeService.findById(luminosidadeId).orElseThrow(() -> new ResourceNotFoundException("Luminosidade", "id", luminosidadeId));
-        sensor.setAuto(model.isAuto());
-        sensor.setData(model.getData());
-        sensor.setDescricao(model.getDescricao());
-        sensor.setEstado(model.isEstado());
-        sensor.setLuminosidade(model.isLuminosidade());
+    @PutMapping("/luminosidade/{id}")
+    public ResponseEntity putLuminosidade(@PathVariable(value="id")long luminosidadeId,@Valid @RequestBody Luminosidade model){
+            Luminosidade l = luminosidadeService.updateLuminosidade(luminosidadeId, model);
+        return ResponseEntity.ok(l) ;
         
-        Luminosidade updateSensor = luminosidadeService.save(sensor);
-
-        return updateSensor;
-
     }
-
+    @GetMapping("/luminosidade/{id}")
+    public Luminosidade getLuminosidadeById(@PathVariable(value = "id") Long luminosidadeId) {
+        return luminosidadeService.getLuminosidade(luminosidadeId);
+    }
+    @PostMapping("/luminosidade")
+    public Luminosidade createTempSensor(Luminosidade model){
+        return luminosidadeService.createLuminosidade(model);
+    }
 }

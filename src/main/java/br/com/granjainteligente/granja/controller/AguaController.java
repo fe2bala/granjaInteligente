@@ -5,8 +5,7 @@
  */
 package br.com.granjainteligente.granja.controller;
 
-import br.com.granjainteligente.granja.Exception.ResourceNotFoundException;
-import br.com.granjainteligente.granja.Repository.AguaRepository;
+import br.com.granjainteligente.granja.Service.AguaService;
 import br.com.granjainteligente.granja.model.Agua;
 import java.util.List;
 import javax.validation.Valid;
@@ -26,35 +25,26 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api")
 public class AguaController {
-
+    
     @Autowired
-    AguaRepository aguaService;
-
-    @GetMapping("/Agua")
-    public List<Agua> getAllAgua() {
-        return aguaService.findAll();
+    AguaService aguaService;
+    
+    @GetMapping("/agua")
+    public List<Agua> getAllAgua(){
+        return aguaService.getAllAguas();
     }
-
-    @PostMapping("/Agua")
-    public Agua createAgua(@Valid @RequestBody Agua agua) {
-        return aguaService.save(agua);
-    }
-
-    @PutMapping("/Agua/{id}")
-    public Agua updateAgua(@PathVariable(value = "id") long aguaId, @Valid @RequestBody Agua model) {
-        Agua sensor = aguaService.findById(aguaId).orElseThrow(() -> new ResourceNotFoundException("Agua", "id", aguaId));
-        sensor.setAuto(model.isAuto());
-        sensor.setData(model.getData());
-        sensor.setDescricao(model.getDescricao());
-        sensor.setEstado(model.isEstado());
-        sensor.setNivel(model.getNivel());
-        sensor.setNivelSet(model.getNivelSet());
-        sensor.setPh(model.getPh());
+    @PutMapping("/agua/{id}")
+    public Agua putAgua(@PathVariable(value="id")long aguaId,@Valid @RequestBody Agua model){
+                
+        return aguaService.updateAgua(aguaId, model);
         
-        Agua updateSensor = aguaService.save(sensor);
-
-        return updateSensor;
-
     }
-
+    @GetMapping("/agua/{id}")
+    public Agua getAguaById(@PathVariable(value = "id") Long aguaId) {
+        return aguaService.getAgua(aguaId);
+    }
+    @PostMapping("/agua")
+    public Agua createTempSensor(Agua model){
+        return aguaService.createAgua(model);
+    }
 }
