@@ -29,7 +29,7 @@ public class AguaService {
     public Agua updateAgua(long aguaId,Agua model){
         
         Agua sensor = aguaRepository.findById(aguaId).orElseThrow(() -> new ResourceNotFoundException("Agua", "id", aguaId));
-        sensorService.update(sensor,model);
+        sensor = (Agua) sensorService.update(sensor,model);
         sensor.setNivel(model.getNivel());
         sensor.setNivelSet(model.getNivelSet());
         Agua updateAgua = aguaRepository.save(sensor);

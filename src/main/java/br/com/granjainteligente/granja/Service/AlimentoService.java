@@ -29,7 +29,7 @@ public class AlimentoService {
     public Alimento updateAlimento(long alimentoId,Alimento model){
         
         Alimento sensor = alimentoRepository.findById(alimentoId).orElseThrow(() -> new ResourceNotFoundException("Alimento", "id", alimentoId));
-        sensorService.update(sensor,model);
+        sensor = (Alimento) sensorService.update(sensor,model);
         sensor.setNivel(model.getNivel());
         sensor.setNivelSet(model.getNivelSet());
         Alimento updateAlimento = alimentoRepository.save(sensor);
