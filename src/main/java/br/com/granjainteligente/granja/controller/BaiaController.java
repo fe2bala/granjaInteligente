@@ -10,6 +10,7 @@ import br.com.granjainteligente.granja.model.Baia;
 import java.util.List;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -28,6 +29,7 @@ public class BaiaController {
     @Autowired
     BaiaService baiaService;
     
+    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("/baias")
     public List<Baia> getAllBaias(){
         return baiaService.getAllBaias();
