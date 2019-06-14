@@ -6,8 +6,8 @@
 package br.com.granjainteligente.granja.controller;
 
 import br.com.granjainteligente.granja.Exception.ResourceNotFoundException;
-import br.com.granjainteligente.granja.Repository.AlimentoRepository;
-import br.com.granjainteligente.granja.model.Alimento;
+import br.com.granjainteligente.granja.Repository.LuminosidadeRepository;
+import br.com.granjainteligente.granja.model.Luminosidade;
 import java.util.List;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,32 +25,31 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/api")
-public class AlimentoController {
+public class LuminosidadeController {
 
     @Autowired
-    AlimentoRepository alimentoService;
+    LuminosidadeRepository luminosidadeService;
 
-    @GetMapping("/Alimento")
-    public List<Alimento> getAllAlimento() {
-        return alimentoService.findAll();
+    @GetMapping("/Luminosidade")
+    public List<Luminosidade> getAllLuminosidade() {
+        return luminosidadeService.findAll();
     }
 
-    @PostMapping("/Alimento")
-    public Alimento createAlimento(@Valid @RequestBody Alimento alimento) {
-        return alimentoService.save(alimento);
+    @PostMapping("/Luminosidade")
+    public Luminosidade createLuminosidade(@Valid @RequestBody Luminosidade luminosidade) {
+        return luminosidadeService.save(luminosidade);
     }
 
-    @PutMapping("/Alimento/{id}")
-    public Alimento updateAlimento(@PathVariable(value = "id") long alimentoId, @Valid @RequestBody Alimento model) {
-        Alimento sensor = alimentoService.findById(alimentoId).orElseThrow(() -> new ResourceNotFoundException("Alimento", "id", alimentoId));
+    @PutMapping("/Luminosidade/{id}")
+    public Luminosidade updateLuminosidade(@PathVariable(value = "id") long luminosidadeId, @Valid @RequestBody Luminosidade model) {
+        Luminosidade sensor = luminosidadeService.findById(luminosidadeId).orElseThrow(() -> new ResourceNotFoundException("Luminosidade", "id", luminosidadeId));
         sensor.setAuto(model.isAuto());
         sensor.setData(model.getData());
         sensor.setDescricao(model.getDescricao());
         sensor.setEstado(model.isEstado());
-        sensor.setNivel(model.getNivel());
-        sensor.setNivelSet(model.getNivelSet());
+        sensor.setLuminosidade(model.isLuminosidade());
         
-        Alimento updateSensor = alimentoService.save(sensor);
+        Luminosidade updateSensor = luminosidadeService.save(sensor);
 
         return updateSensor;
 
