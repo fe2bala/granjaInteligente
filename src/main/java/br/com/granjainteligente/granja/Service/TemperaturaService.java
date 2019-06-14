@@ -28,7 +28,7 @@ public class TemperaturaService {
     public Temperatura updateTemperatura(long temperaturaId,Temperatura model){
         
         Temperatura sensor = temperaturaRepository.findById(temperaturaId).orElseThrow(() -> new ResourceNotFoundException("Temperatura", "id", temperaturaId));
-        sensorService.update(sensor, model);
+        sensor = (Temperatura) sensorService.update(sensor, model);
         sensor.setCurrentTemperature(model.getCurrentTemperature());
         sensor.setTemperatureSet(model.getTemperatureSet());
         Temperatura updateTemperatura = temperaturaRepository.save(sensor);

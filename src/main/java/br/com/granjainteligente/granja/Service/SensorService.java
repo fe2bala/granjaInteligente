@@ -15,11 +15,12 @@ import br.com.granjainteligente.granja.model.Sensor;
  */
 public class SensorService {
 
-    public void update(Sensor sensor,Sensor model) {
+    public Sensor update(Sensor sensor,Sensor model) {
         sensor.setAuto(model.isAuto());
         sensor.setData(model.getData());
         sensor.setDescricao(model.getDescricao());
-        sensor.setEstado(sensor.isEstado());
+        sensor.setEstado(model.isEstado());
+        return sensor;
         
     }
     
