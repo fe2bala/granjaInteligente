@@ -29,7 +29,7 @@ public class BaiaController {
     @Autowired
     BaiaService baiaService;
     
-    @CrossOrigin(origins = "http://localhost:4200")
+    @CrossOrigin(origins = "*")
     @GetMapping("/baias")
     public List<Baia> getAllBaias(){
         return baiaService.getAllBaias();

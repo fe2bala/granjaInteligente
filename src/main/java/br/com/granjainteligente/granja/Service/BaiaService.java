@@ -39,6 +39,7 @@ public class BaiaService {
         
         return updateBaia; 
     }
+    
     public Baia createBaia(Baia baia) {
         Baia createdBaia = baiaRepository.save(baia);
         return createdBaia;
@@ -49,9 +50,13 @@ public class BaiaService {
         alimentoService.verifySensor(baia.getAlimento());
         aguaService.verifySensor(baia.getAgua());
     }
+    
     public List<Baia> getAllBaias(){
         List<Baia> baias =  baiaRepository.findAll();
-        //verificar aqui? foreach baia verifySensors
+        
+        for (Baia b : baias) {
+            verifySensors(b);
+        }
         return baias;
     }
     
