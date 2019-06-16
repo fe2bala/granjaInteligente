@@ -10,6 +10,7 @@ import br.com.granjainteligente.granja.Repository.AlimentoRepository;
 import br.com.granjainteligente.granja.model.Alimento;
 import br.com.granjainteligente.granja.model.Alimento;
 import java.util.List;
+import java.util.Random;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -22,34 +23,46 @@ public class AlimentoService {
     AlimentoRepository alimentoRepository;
     @Autowired
     SensorService sensorService;
-    public Alimento getAlimento(long id){
+
+    public Alimento getAlimento(long id) {
         //verificar aqui?
         return alimentoRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Alimento", "id", id));
     }
-    public Alimento updateAlimento(long alimentoId,Alimento model){
-        
+
+    public Alimento updateAlimento(long alimentoId, Alimento model) {
+
         Alimento sensor = alimentoRepository.findById(alimentoId).orElseThrow(() -> new ResourceNotFoundException("Alimento", "id", alimentoId));
-        sensor = (Alimento) sensorService.update(sensor,model);
+        sensor = (Alimento) sensorService.update(sensor, model);
         sensor.setNivel(model.getNivel());
         sensor.setNivelSet(model.getNivelSet());
         Alimento updateAlimento = alimentoRepository.save(sensor);
-        
-        return updateAlimento; 
+
+        return updateAlimento;
     }
+
     public Alimento createAlimento(Alimento alimento) {
         Alimento createdAlimento = alimentoRepository.save(alimento);
         return createdAlimento;
     }
-        
 
-    public List<Alimento> getAllAlimentos(){
-        List<Alimento> alimentos =  alimentoRepository.findAll();
+    public List<Alimento> getAllAlimentos() {
+        List<Alimento> alimentos = alimentoRepository.findAll();
         //verificar aqui? foreach alimento verifySensors
         return alimentos;
     }
 
-    public void verifySensor(Alimento alimento) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Alimento verifySensor(Alimento alimento) {
+        if (alimento != null) {
+            float currNivel = alimento.getNivel();
+            Random rand = new Random();
+            if (currNivel < alimento.getNivelSet()) {
+                // aumenta o nivel do alimento em ate 5 por cento
+                alimento.setNivel((5 * rand.nextFloat()) + currNivel);
+            }
+            return updateAlimento(alimento.getId(), alimento);
+        } else {
+            return null;
+        }
     }
-    
+
 }
