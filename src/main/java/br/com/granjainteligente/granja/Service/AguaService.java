@@ -10,6 +10,7 @@ import br.com.granjainteligente.granja.Repository.AguaRepository;
 import br.com.granjainteligente.granja.model.Agua;
 import br.com.granjainteligente.granja.model.Agua;
 import java.util.List;
+import java.util.Random;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -48,8 +49,18 @@ public class AguaService {
         return aguas;
     }
 
-    public void verifySensor(Agua agua) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Agua verifySensor(Agua agua) {
+        if (agua != null) {
+            float currNivel = agua.getNivel();
+            Random rand = new Random();
+            if (currNivel < agua.getNivelSet()) {
+                // aumenta o nivel do agua em ate 5 por cento
+                agua.setNivel((5 * rand.nextFloat()) + currNivel);
+            }
+            return updateAgua(agua.getId(), agua);
+        } else {
+            return null;
+        }
     }
 
 
