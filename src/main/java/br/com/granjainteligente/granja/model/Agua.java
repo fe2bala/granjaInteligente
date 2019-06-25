@@ -21,6 +21,15 @@ public class Agua extends Sensor {
     private Baia baia;
     private float Nivel;
     private float NivelSet;
+    private boolean PhAnormal;
+
+    public boolean isPhAnormal() {
+        return PhAnormal;
+    }
+
+    public void setPhAnormal(boolean PhAnormal) {
+        this.PhAnormal = PhAnormal;
+    }
 
 
     public float getNivel() {
