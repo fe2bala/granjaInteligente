@@ -51,16 +51,24 @@ public class TemperaturaService {
     }
 
     public Temperatura verifySensor(Temperatura temperatura) {
-        if (temperatura != null) {
+        if (temperatura != null && temperatura.isAuto()) {
             float currTemp = temperatura.getCurrentTemperature();
             Random rand = new Random();
 
+            // comanda os climatizadores
             if (currTemp < (temperatura.getTemperatureSet() - 2)) {
-                // aumenta a temperatura em ate 3 graus
+                temperatura.setAquecedor(true);
+                temperatura.setVentilador(false);
                 temperatura.setCurrentTemperature(currTemp + (3 * rand.nextFloat()));
             } else if (currTemp > (temperatura.getTemperatureSet() + 2)) {
+                temperatura.setAquecedor(false);
+                temperatura.setVentilador(true);
                 temperatura.setCurrentTemperature(currTemp - (3 * rand.nextFloat()));
+            } else {
+                temperatura.setAquecedor(false);
+                temperatura.setVentilador(false);
             }
+
             return updateTemperatura(temperatura.getId(), temperatura);
         } else {
             return null;
