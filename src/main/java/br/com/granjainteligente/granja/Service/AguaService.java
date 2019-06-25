@@ -50,7 +50,7 @@ public class AguaService {
     }
 
     public Agua verifySensor(Agua agua) {
-        if (agua != null) {
+        if (agua != null && agua.isAuto()) {
             float currNivel = agua.getNivel();
             Random rand = new Random();
             if (currNivel < agua.getNivelSet()) {

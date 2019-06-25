@@ -52,7 +52,7 @@ public class AlimentoService {
     }
 
     public Alimento verifySensor(Alimento alimento) {
-        if (alimento != null) {
+        if (alimento != null && alimento.isAuto()) {
             float currNivel = alimento.getNivel();
             Random rand = new Random();
             if (currNivel < alimento.getNivelSet()) {

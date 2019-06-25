@@ -33,8 +33,27 @@ public class Temperatura extends Sensor {
     public void setTemperatureSet(float TemperatureSet) {
         this.TemperatureSet = TemperatureSet;
     }
+
+    public boolean isAquecedor() {
+        return Aquecedor;
+    }
+
+    public void setAquecedor(boolean Aquecedor) {
+        this.Aquecedor = Aquecedor;
+    }
+
+    public boolean isVentilador() {
+        return Ventilador;
+    }
+
+    public void setVentilador(boolean Ventilador) {
+        this.Ventilador = Ventilador;
+    }
+    
     private float CurrentTemperature;
     private float TemperatureSet;
+    private boolean Aquecedor;
+    private boolean Ventilador;
     @OneToOne(mappedBy = "Temperatura")
     private Baia baia;
 
