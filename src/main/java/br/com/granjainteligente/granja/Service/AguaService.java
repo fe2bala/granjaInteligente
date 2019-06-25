@@ -34,6 +34,12 @@ public class AguaService {
         sensor = (Agua) sensorService.update(sensor, model);
         sensor.setNivel(model.getNivel());
         sensor.setNivelSet(model.getNivelSet());
+        sensor.setAuto(model.isAuto());
+        sensor.setData(model.getData());
+        sensor.setDescricao(model.getDescricao());
+        sensor.setEstado(model.isEstado());
+        sensor.setPh(model.getPh());
+        sensor.setPhAnormal(model.isPhAnormal());
         Agua updateAgua = aguaRepository.save(sensor);
 
         return updateAgua;
@@ -52,24 +58,23 @@ public class AguaService {
 
     public Agua verifySensor(Agua agua) {
         if (agua != null && agua.isAuto()) {
+            // gerencia o nivel da agua
             float currNivel = agua.getNivel();
             Random rand = new Random();
+            
             if (currNivel < agua.getNivelSet()) {
-                // aumenta o nivel do agua em ate 5 por cento
                 agua.setNivel((5 * rand.nextFloat()) + currNivel);
             }
-            return updateAgua(agua.getId(), agua);
-        } else if (agua != null) {
-            float currPh = agua.getPh();
             
-            if (currPh < 6.0 && currPh > 9.0) {
+            // confere o nivel do PH
+            float currPh = agua.getPh();
+            if (currPh < 6.0 || currPh > 9.0) {
                 agua.setPhAnormal(true);
             } else {
                 agua.setPhAnormal(false);
             }
             
             return updateAgua(agua.getId(), agua);
-
         } else {
             return null;
         }

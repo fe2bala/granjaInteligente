@@ -8,7 +8,6 @@ package br.com.granjainteligente.granja.Service;
 import br.com.granjainteligente.granja.Exception.ResourceNotFoundException;
 import br.com.granjainteligente.granja.Repository.AlimentoRepository;
 import br.com.granjainteligente.granja.model.Alimento;
-import br.com.granjainteligente.granja.model.Alimento;
 import java.util.List;
 import java.util.Random;
 import org.springframework.beans.factory.annotation.Autowired;
