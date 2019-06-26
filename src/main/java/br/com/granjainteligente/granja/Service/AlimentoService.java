@@ -8,7 +8,6 @@ package br.com.granjainteligente.granja.Service;
 import br.com.granjainteligente.granja.Exception.ResourceNotFoundException;
 import br.com.granjainteligente.granja.Repository.AlimentoRepository;
 import br.com.granjainteligente.granja.model.Alimento;
-import br.com.granjainteligente.granja.model.Alimento;
 import java.util.List;
 import java.util.Random;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,7 +50,7 @@ public class AlimentoService {
     }
 
     public Alimento verifySensor(Alimento alimento) {
-        if (alimento != null) {
+        if (alimento != null && alimento.isAuto()) {
             float currNivel = alimento.getNivel();
             Random rand = new Random();
             if (currNivel < alimento.getNivelSet()) {
