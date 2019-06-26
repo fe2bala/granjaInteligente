@@ -44,7 +44,9 @@ public class BaiaController {
         
        return baiaService.updateBaia(baiaId, model);
     }
-    @GetMapping("/baia/{id}")
+    
+    @CrossOrigin(origins = "*")
+    @GetMapping("/baias/{id}")
     public Baia getBaiaById(@PathVariable(value = "id") Long baiaId) {
         //verificao aqui
        return baiaService.getBaia(baiaId);
