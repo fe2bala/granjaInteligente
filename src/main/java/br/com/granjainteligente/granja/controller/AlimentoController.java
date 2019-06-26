@@ -33,6 +33,8 @@ public class AlimentoController {
     public List<Alimento> getAllAlimento(){
         return alimentoService.getAllAlimentos();
     }
+    
+    
     @PutMapping("/alimento/{id}")
     public Alimento putAlimento(@PathVariable(value="id")long alimentoId,@Valid @RequestBody Alimento model){
         

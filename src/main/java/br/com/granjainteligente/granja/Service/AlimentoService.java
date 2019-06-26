@@ -25,7 +25,6 @@ public class AlimentoService {
     SensorService sensorService;
 
     public Alimento getAlimento(long id) {
-        //verificar aqui?
         return alimentoRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Alimento", "id", id));
     }
 
