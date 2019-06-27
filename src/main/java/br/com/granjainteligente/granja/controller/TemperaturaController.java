@@ -26,7 +26,7 @@ public class TemperaturaController {
     TemperaturaService temperaturaService;
     
     /**
-     * Método para retornar todos os sensores do tipo Luminosidade
+     * Método para retornar todos os sensores do tipo Temperatura
      * @return List com as instâncias de Temperatura
      */
     @GetMapping("/temperatura")
@@ -35,7 +35,7 @@ public class TemperaturaController {
     }
 
     /**
-     * Realiza uma operação de PUT na instância com id luminosidadeId
+     * Realiza uma operação de PUT na instância com id temperaturaId
      * atualizando os dados com os dados de model.
      * @param temperaturaId
      * @param model
@@ -48,7 +48,7 @@ public class TemperaturaController {
     }
 
     /**
-     * Requisição de um único objeto, identificado por luminosidadeId
+     * Requisição de um único objeto, identificado por temperaturaId
      * @param temperaturaId
      * @return Objeto Temperatura com o id procurado
      */
@@ -58,7 +58,7 @@ public class TemperaturaController {
     }
 
     /**
-     * Requisição de inserir model no banco de dados
+     * Requisição criar um novo model no banco de dados
      * @param model
      * @return
      */

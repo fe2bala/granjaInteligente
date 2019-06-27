@@ -52,7 +52,7 @@ public class LuminosidadeController {
     }
 
     /**
-     * Requisição de um único objeto, identificado por luminosidadeId
+     * Requisição que retorna de um único objeto luminosidade, identificado por luminosidadeId
      * @param luminosidadeId
      * @return Objeto Luminosidade com o id procurado
      */
@@ -62,7 +62,7 @@ public class LuminosidadeController {
     }
 
     /**
-     * Requisição de inserir model no banco de dados
+     * Requisição para criar um novo model no banco de dados
      * @param model
      * @return Objeto Luminosidade inserido
      */
