@@ -9,10 +9,6 @@ import br.com.granjainteligente.granja.model.Baia;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-/**
- *
- * @author felip
- */
 @Repository
 public interface BaiaRepository extends JpaRepository<Baia,Long>{
     

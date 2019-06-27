@@ -53,7 +53,7 @@ public class TemperaturaController {
      * @return Objeto Temperatura com o id procurado
      */
     @GetMapping("/temperatura/{id}")
-    public Temperatura getBaiaById(@PathVariable(value = "id") Long temperaturaId) {
+    public Temperatura getTemperaturaById(@PathVariable(value = "id") Long temperaturaId) {
         return temperaturaService.getTemperatura(temperaturaId);
     }
 
@@ -63,7 +63,7 @@ public class TemperaturaController {
      * @return
      */
     @PostMapping("/temperatura")
-    public Temperatura createTempSensor(Temperatura model){
+    public Temperatura createTemperaturaSensor(Temperatura model){
         return temperaturaService.createTemperatura(model);
     }
 }
