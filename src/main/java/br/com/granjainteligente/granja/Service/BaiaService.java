@@ -22,16 +22,18 @@ public class BaiaService {
     AguaService aguaService;
     
     /**
-     * Busca pelo objeto que possui o id indicado
+     * Busca pelo objeto que possui o id indicado, e simula a atualizacao dos seus sensores
      * @param id
      * @return Baia como id requisitado
      */
     public Baia getBaia(long id){
-        return baiaRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Baia", "id", id));
+        Baia baia = baiaRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Baia", "id", id));
+        verifySensors(baia);
+        return baia;
     }
     
     /**
-     * Atualiza o objeto que possui o id indicado
+     * Atualiza o objeto que possui o id indicado, se existir
      * @param baiaId
      * @param model
      * @return Objeto Baia atualizado
@@ -68,7 +70,7 @@ public class BaiaService {
     }
     
     /**
-     * Busca por todas as instâncias de Baia
+     * Busca por todas as instâncias de Baia simulando a alteraçao nos sensores
      * @return Lista com todos os objetos Baia
      */
     public List<Baia> getAllBaias(){

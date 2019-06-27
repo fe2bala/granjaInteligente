@@ -36,8 +36,8 @@ public class AguaController {
     }
 
     /**
-     * Realiza uma operação de PUT na instância com id aguaId
-     * atualizando os dados com os dados de model.
+     * Realiza uma operação de PUT na instância com identificador = aguaId
+     * atualizando os dados do sensor com os dados do model.
      * @param aguaId
      * @param model
      * @return Objeto atualizado
@@ -50,7 +50,7 @@ public class AguaController {
     }
 
     /**
-     * Requisição de um único objeto, identificado por aguaId
+     * Metodo retorna de um único objeto Agua, identificado por seu identificador
      * @param aguaId
      * @return Objeto Agua com o id procurado
      */
@@ -60,9 +60,9 @@ public class AguaController {
     }
 
     /**
-     * Requisição de inserir model no banco de dados
+     * Requisição de criar um novo model no banco de dados
      * @param model
-     * @return Objeto Agua inserido
+     * @return Objeto Agua criado
      */
     @PostMapping("/agua")
     public Agua createAgua(Agua model){

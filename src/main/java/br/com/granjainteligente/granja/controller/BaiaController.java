@@ -26,7 +26,7 @@ public class BaiaController {
     BaiaService baiaService;
     
     /**
-     * Método para retornar todos os sensores do tipo Baia
+     * Método para retornar todas as Baias existentes na base de dados
      * @return List com as intâncias de Baia
      */
     @CrossOrigin(origins = "*")
@@ -36,7 +36,7 @@ public class BaiaController {
     }
     
     /**
-     * Requisição de inserir model no banco de dados
+     * Requisição para criar um nova baia no banco de dados
      * @param baia
      * @return Objeto Baia inserido
      */
@@ -59,7 +59,7 @@ public class BaiaController {
     }
     
     /**
-     * Requisição de um único objeto, identificado por baiaId
+     * Requisição para recuperar um único objeto baia, identificado por baiaId
      * @param baiaId
      * @return Objeto Baia com o id procurado
      */

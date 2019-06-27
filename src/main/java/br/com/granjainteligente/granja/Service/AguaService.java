@@ -22,7 +22,7 @@ public class AguaService {
     /**
      * Busca pelo objeto que possui o id indicado
      * @param id
-     * @return Sensor Agua com o id requisitado
+     * @return Sensor Agua com o id requisitado ou uma exceção caso nao seja encontrado
      */
     public Agua getAgua(long id) {
         return aguaRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Agua", "id", id));
@@ -32,7 +32,7 @@ public class AguaService {
      * Atualiza o objeto que possui o id indicado
      * @param aguaId
      * @param model
-     * @return Objeto Agua atualizado
+     * @return Objeto Agua atualizado ou uma exceção caso nao seja encontrado
      */
     public Agua updateAgua(long aguaId, Agua model) {
 

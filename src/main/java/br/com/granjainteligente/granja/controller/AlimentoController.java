@@ -26,7 +26,7 @@ public class AlimentoController {
     AlimentoService alimentoService;
     
     /**
-     * Método para recuperar todos os elementos do tipo Alimento
+     * Método para recuperar todos os sensores do tipo Alimento
      * @return Lista com objetos da classe Alimento
      */
     @GetMapping("/alimento")
@@ -49,7 +49,7 @@ public class AlimentoController {
     }
 
     /**
-     * Requisição de um único objeto, identificado por alimentoId
+     * Requisição para recuperar um único objeto Alimento, identificado por alimentoId
      * @param alimentoId 
      * @return Objeto Alimento com o id procurado
      */
@@ -59,7 +59,7 @@ public class AlimentoController {
     }
 
     /**
-     * Requisição de inserir model no banco de dados
+     * Requisição para criar um novo model no banco de dados
      * @param model
      * @return Objeto Alimento inserido
      */
