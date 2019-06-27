@@ -14,7 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  *
- * @author felip
+ * @author lucas
  */
 public class AlimentoService {
 
@@ -23,10 +23,21 @@ public class AlimentoService {
     @Autowired
     SensorService sensorService;
 
+    /**
+     * Busca pelo objeto que possui o id indicado
+     * @param id
+     * @return Sensor Alimento com o id requisitado
+     */
     public Alimento getAlimento(long id) {
         return alimentoRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Alimento", "id", id));
     }
 
+    /**
+     * Atualiza o objeto que possui o id indicado
+     * @param alimentoId
+     * @param model
+     * @return Objeto Alimento atualizado
+     */
     public Alimento updateAlimento(long alimentoId, Alimento model) {
 
         Alimento sensor = alimentoRepository.findById(alimentoId).orElseThrow(() -> new ResourceNotFoundException("Alimento", "id", alimentoId));
@@ -38,17 +49,32 @@ public class AlimentoService {
         return updateAlimento;
     }
 
+    /**
+     * Cria uma nova instância de Alimento
+     * @param alimento
+     * @return Objeto Alimento criado
+     */
     public Alimento createAlimento(Alimento alimento) {
         Alimento createdAlimento = alimentoRepository.save(alimento);
         return createdAlimento;
     }
 
+    /**
+     * Busca por todas as intâncias de Alimento
+     * @return Lista com todos os objetos Alimento
+     */
     public List<Alimento> getAllAlimentos() {
         List<Alimento> alimentos = alimentoRepository.findAll();
         //verificar aqui? foreach alimento verifySensors
         return alimentos;
     }
 
+    /**
+     * Método que aplica as regras de negócio para o sensor
+     * Simulando a alteração nos valores, em resposta
+     * @param alimento
+     * @return sensor com dados atualizados em resposta às regras de negócio
+     */
     public Alimento verifySensor(Alimento alimento) {
         if (alimento != null && alimento.isAuto()) {
             float currNivel = alimento.getNivel();
