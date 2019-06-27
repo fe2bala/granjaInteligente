@@ -18,10 +18,6 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-/**
- *
- * @author felip
- */
 @Entity
 @EntityListeners(AuditingEntityListener.class)
 @Table(name="baia")
