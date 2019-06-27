@@ -12,10 +12,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import java.util.Random;
 
-/**
- *
- * @author felip
- */
 public class TemperaturaService {
 
     @Autowired
@@ -23,11 +19,21 @@ public class TemperaturaService {
     @Autowired
     SensorService sensorService;
 
+    /**
+     * Busca pelo objeto que possui o id indicado
+     * @param id
+     * @return Sensor Temperatura com o id requisitado
+     */
     public Temperatura getTemperatura(long id) {
-        //verificar aqui?
         return temperaturaRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Temperatura", "id", id));
     }
 
+    /**
+     * Atualiza o objeto que possui o id indicado
+     * @param temperaturaId
+     * @param model
+     * @return Objeto Temperatura atualizado
+     */
     public Temperatura updateTemperatura(long temperaturaId, Temperatura model) {
 
         Temperatura sensor = temperaturaRepository.findById(temperaturaId).orElseThrow(() -> new ResourceNotFoundException("Temperatura", "id", temperaturaId));
@@ -39,17 +45,31 @@ public class TemperaturaService {
         return updateTemperatura;
     }
 
+    /**
+     * Cria uma nova instância de Temperatura
+     * @param temperatura
+     * @return Objeto Temperatura criado
+     */
     public Temperatura createTemperatura(Temperatura temperatura) {
         Temperatura createdTemperatura = temperaturaRepository.save(temperatura);
         return createdTemperatura;
     }
 
+    /**
+     * Busca por todas as instâncias de Temperatura
+     * @return Lista com todos os objetos Temperatura
+     */
     public List<Temperatura> getAllTemperaturas() {
         List<Temperatura> temperaturas = temperaturaRepository.findAll();
-
         return temperaturas;
     }
 
+    /**
+     * Método que aplica as regras de negócio para o sensor
+     * Simulando a alteração nos valores, em resposta
+     * @param temperatura
+     * @return sensor com dados atualizados em resposta às regras de negócio
+     */
     public Temperatura verifySensor(Temperatura temperatura) {
         if (temperatura != null && temperatura.isAuto()) {
             float currTemp = temperatura.getCurrentTemperature();

@@ -20,10 +20,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-/**
- *
- * @author felip
- */
 @RestController
 @CrossOrigin(allowedHeaders = "*",origins = "*")
 @RequestMapping("/api")
@@ -32,22 +28,46 @@ public class LuminosidadeController {
     @Autowired
     LuminosidadeService luminosidadeService;
     
+    /**
+     * Método para retornar todos os sensores do tipo Luminosidade
+     * @return List com as instâncias de Luminosidade
+     */
     @GetMapping("/luminosidade")
     public List<Luminosidade> getAllLuminosidade(){
         return luminosidadeService.getAllLuminosidades();
     }
+
+    /**
+     * Realiza uma operação de PUT na instância com id luminosidadeId
+     * atualizando os dados com os dados de model.
+     * @param luminosidadeId
+     * @param model
+     * @return Objeto atualizado
+     */
     @PutMapping("/luminosidade/{id}")
     public ResponseEntity putLuminosidade(@PathVariable(value="id")long luminosidadeId,@Valid @RequestBody Luminosidade model){
             Luminosidade l = luminosidadeService.updateLuminosidade(luminosidadeId, model);
         return ResponseEntity.ok(l) ;
         
     }
+
+    /**
+     * Requisição que retorna de um único objeto luminosidade, identificado por luminosidadeId
+     * @param luminosidadeId
+     * @return Objeto Luminosidade com o id procurado
+     */
     @GetMapping("/luminosidade/{id}")
     public Luminosidade getLuminosidadeById(@PathVariable(value = "id") Long luminosidadeId) {
         return luminosidadeService.getLuminosidade(luminosidadeId);
     }
+
+    /**
+     * Requisição para criar um novo model no banco de dados
+     * @param model
+     * @return Objeto Luminosidade inserido
+     */
     @PostMapping("/luminosidade")
-    public Luminosidade createTempSensor(Luminosidade model){
+    public Luminosidade createLuminosidadeSensor(Luminosidade model){
         return luminosidadeService.createLuminosidade(model);
     }
 }

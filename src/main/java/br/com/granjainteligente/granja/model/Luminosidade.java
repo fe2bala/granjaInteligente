@@ -12,19 +12,24 @@ import javax.persistence.InheritanceType;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-/**
- *
- * @author felip
- */
 @Entity
 @Table(name = "luminosidade")
 public class Luminosidade extends Sensor {
+
     private boolean Luminosidade;
 
+    /**
+     * Retorna se a iluminação da baia está ligada (true) ou desligada (false)
+     * @return iluminação ligada (true) ou desligada (false)
+     */
     public boolean isLuminosidade() {
         return Luminosidade;
     }
 
+    /**
+     * 
+     * @param Luminosidade
+     */
     public void setLuminosidade(boolean Luminosidade) {
         this.Luminosidade = Luminosidade;
     }
@@ -32,6 +37,4 @@ public class Luminosidade extends Sensor {
     @OneToOne(mappedBy = "Luminosidade")
     private Baia baia;
 
-
-    
 }

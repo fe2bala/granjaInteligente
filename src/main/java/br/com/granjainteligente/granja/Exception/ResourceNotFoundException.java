@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.ResponseStatus;
  *
  * @author felip
  */
+/*
+ *Exececao generica para o caso de nao encontrar o que estava procurando
+ */
 @ResponseStatus(value = HttpStatus.NOT_FOUND)
 public class ResourceNotFoundException extends RuntimeException {
     private String resourceName;

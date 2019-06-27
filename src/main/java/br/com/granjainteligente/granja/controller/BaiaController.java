@@ -19,32 +19,50 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-/**
- *
- * @author felip
- */
 @RestController
 @RequestMapping("/api")
 public class BaiaController {
     @Autowired
     BaiaService baiaService;
     
+    /**
+     * Método para retornar todas as Baias existentes na base de dados
+     * @return List com as intâncias de Baia
+     */
     @CrossOrigin(origins = "*")
     @GetMapping("/baias")
     public List<Baia> getAllBaias(){
         return baiaService.getAllBaias();
     }
     
+    /**
+     * Requisição para criar um nova baia no banco de dados
+     * @param baia
+     * @return Objeto Baia inserido
+     */
     @PostMapping("/baias")
     public Baia createBaia(@Valid @RequestBody Baia baia) {   
         return baiaService.createBaia(baia);
     }
+
+    /**
+     * Realiza uma operação de PUT na instância com id baiaId
+     * atualizando os dados com os dados de model.
+     * @param baiaId
+     * @param model
+     * @return Objeto atualizado
+     */
     @PutMapping("/baias/{id}")
     public Baia updateBaia(@PathVariable(value="id")long baiaId, @Valid @RequestBody Baia model){
         
        return baiaService.updateBaia(baiaId, model);
     }
     
+    /**
+     * Requisição para recuperar um único objeto baia, identificado por baiaId
+     * @param baiaId
+     * @return Objeto Baia com o id procurado
+     */
     @CrossOrigin(origins = "*")
     @GetMapping("/baias/{id}")
     public Baia getBaiaById(@PathVariable(value = "id") Long baiaId) {
