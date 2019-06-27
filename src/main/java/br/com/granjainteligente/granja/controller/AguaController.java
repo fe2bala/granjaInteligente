@@ -18,10 +18,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-/**
- *
- * @author felip
- */
+
 @RestController
 @RequestMapping("/api")
 public class AguaController {
@@ -29,22 +26,46 @@ public class AguaController {
     @Autowired
     AguaService aguaService;
     
+    /**
+     * Método para retornar todos os sensores do tipo Agua
+     * @return List com as instâncias de Agua
+     */
     @GetMapping("/agua")
     public List<Agua> getAllAgua(){
         return aguaService.getAllAguas();
     }
+
+    /**
+     * Realiza uma operação de PUT na instância com id aguaId
+     * atualizando os dados com os dados de model.
+     * @param aguaId
+     * @param model
+     * @return Objeto atualizado
+     */
     @PutMapping("/agua/{id}")
     public Agua putAgua(@PathVariable(value="id")long aguaId,@Valid @RequestBody Agua model){
                 
         return aguaService.updateAgua(aguaId, model);
         
     }
+
+    /**
+     * Requisição de um único objeto, identificado por aguaId
+     * @param aguaId
+     * @return Objeto Agua com o id procurado
+     */
     @GetMapping("/agua/{id}")
     public Agua getAguaById(@PathVariable(value = "id") Long aguaId) {
         return aguaService.getAgua(aguaId);
     }
+
+    /**
+     * Requisição de inserir model no banco de dados
+     * @param model
+     * @return Objeto Agua inserido
+     */
     @PostMapping("/agua")
-    public Agua createTempSensor(Agua model){
+    public Agua createAgua(Agua model){
         return aguaService.createAgua(model);
     }
 }

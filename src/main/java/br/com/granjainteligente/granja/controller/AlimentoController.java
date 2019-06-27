@@ -18,10 +18,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-/**
- *
- * @author felip
- */
 @RestController
 @RequestMapping("/api")
 public class AlimentoController {
@@ -29,23 +25,44 @@ public class AlimentoController {
     @Autowired
     AlimentoService alimentoService;
     
+    /**
+     * Método para recuperar todos os elementos do tipo Alimento
+     * @return Lista com objetos da classe Alimento
+     */
     @GetMapping("/alimento")
     public List<Alimento> getAllAlimento(){
         return alimentoService.getAllAlimentos();
     }
     
-    
+    /**
+     * Realiza uma operação de PUT na instância com id alimentoId
+     * atualizando os dados com os dados de model.
+     * @param alimentoId 
+     * @param model
+     * @return Objeto atualizado
+     */
     @PutMapping("/alimento/{id}")
     public Alimento putAlimento(@PathVariable(value="id")long alimentoId,@Valid @RequestBody Alimento model){
         
         return alimentoService.updateAlimento(alimentoId, model);
         
     }
+
+    /**
+     * Requisição de um único objeto, identificado por alimentoId
+     * @param alimentoId 
+     * @return Objeto Alimento com o id procurado
+     */
     @GetMapping("/alimento/{id}")
-    public Alimento getBaiaById(@PathVariable(value = "id") Long alimentoId) {
-        //fazer verifacao aqui
+    public Alimento getAlimentoById(@PathVariable(value = "id") Long alimentoId) {
         return alimentoService.getAlimento(alimentoId);
     }
+
+    /**
+     * Requisição de inserir model no banco de dados
+     * @param model
+     * @return Objeto Alimento inserido
+     */
     @PostMapping("/alimento")
     public Alimento createAlimentoSensor(Alimento model){
         return alimentoService.createAlimento(model);

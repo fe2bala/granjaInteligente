@@ -12,10 +12,6 @@ import java.util.List;
 import java.util.Random;
 import org.springframework.beans.factory.annotation.Autowired;
 
-/**
- *
- * @author felip
- */
 public class AguaService {
 
     @Autowired
@@ -23,11 +19,21 @@ public class AguaService {
     @Autowired
     SensorService sensorService;
 
+    /**
+     * Busca pelo objeto que possui o id indicado
+     * @param id
+     * @return Sensor Agua com o id requisitado
+     */
     public Agua getAgua(long id) {
-        //verificar aqui?
         return aguaRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Agua", "id", id));
     }
 
+    /**
+     * Atualiza o objeto que possui o id indicado
+     * @param aguaId
+     * @param model
+     * @return Objeto Agua atualizado
+     */
     public Agua updateAgua(long aguaId, Agua model) {
 
         Agua sensor = aguaRepository.findById(aguaId).orElseThrow(() -> new ResourceNotFoundException("Agua", "id", aguaId));
@@ -45,17 +51,31 @@ public class AguaService {
         return updateAgua;
     }
 
+    /**
+     * Cria uma nova instância de Agua
+     * @param agua
+     * @return Objeto Agua criado
+     */
     public Agua createAgua(Agua agua) {
         Agua createdAgua = aguaRepository.save(agua);
         return createdAgua;
     }
 
+    /**
+     * Busca por todas as instâncias de Agua
+     * @return Lista com todos os objetos Agua
+     */
     public List<Agua> getAllAguas() {
         List<Agua> aguas = aguaRepository.findAll();
-        //verificar aqui? foreach agua verifySensors
         return aguas;
     }
 
+    /**
+     * Método que aplica as regras de negócio para o sensor
+     * Simulando a alteração nos valores, em resposta
+     * @param agua
+     * @return sensor com dados atualizados em resposta às regras de negócio
+     */
     public Agua verifySensor(Agua agua) {
         if (agua != null && agua.isAuto()) {
             // gerencia o nivel da agua
@@ -68,7 +88,7 @@ public class AguaService {
             
             // confere o nivel do PH
             float currPh = agua.getPh();
-            if (currPh < 6.0 || currPh > 9.0) {
+            if (currPh < 6.0 || currPh > 8.5) {
                 agua.setPhAnormal(true);
             } else {
                 agua.setPhAnormal(false);

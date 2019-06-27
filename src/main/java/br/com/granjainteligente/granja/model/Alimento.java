@@ -11,10 +11,6 @@ import javax.persistence.InheritanceType;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-/**
- *
- * @author felip
- */
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @Table(name = "alimento")
@@ -27,18 +23,34 @@ public class Alimento extends Sensor {
     @OneToOne(mappedBy = "Alimento")
     private Baia baia;
 
+    /**
+     * Valor esperado que o nível se mantenha
+     * @return valor no intervalo [0,100]
+     */
     public float getNivelSet() {
         return NivelSet;
     }
 
+    /**
+     * Valor esperado que o nível atinja e se mantenha
+     * @param NivelSet
+     */
     public void setNivelSet(float NivelSet) {
         this.NivelSet = NivelSet;
     }
 
+    /**
+     * Nível atual lido pelo sensor
+     * @return valor no intervalo [0,100]
+     */
     public float getNivel() {
         return Nivel;
     }
 
+    /**
+     * Registra o valor lido pelo sensor
+     * @param Nivel
+     */
     public void setNivel(float Nivel) {
         this.Nivel = Nivel;
     }
